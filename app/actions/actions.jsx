@@ -1,5 +1,6 @@
-import firebase, {firebaseRef} from 'app/firebase/index';
 import moment from 'moment';
+
+import firebase, {firebaseRef} from 'app/firebase/';
 
 export var setSearchText = (searchText) => {
   return {
@@ -28,8 +29,7 @@ export var startAddTodo = (text) => {
       completed: false,
       createdAt: moment().unix(),
       completedAt: null
-    }
-
+    };
     var todoRef = firebaseRef.child('todos').push(todo);
 
     return todoRef.then(() => {
@@ -53,10 +53,10 @@ export var startAddTodos = () => {
     var todosRef = firebaseRef.child('todos');
 
     return todosRef.once('value').then((snapshot) => {
-      var todos = snapshot.val() || {};
+      var todos = snapshot.val() || {};
       var parsedTodos = [];
 
-      Object.keys(todos).forEach((todoId)=>{
+      Object.keys(todos).forEach((todoId) => {
         parsedTodos.push({
           id: todoId,
           ...todos[todoId]
@@ -66,7 +66,7 @@ export var startAddTodos = () => {
       dispatch(addTodos(parsedTodos));
     });
   };
-}
+};
 
 export var updateTodo = (id, updates) => {
   return {
@@ -85,7 +85,7 @@ export var startToggleTodo = (id, completed) => {
     };
 
     return todoRef.update(updates).then(() => {
-      dispatch(updateTodo(id, updates))
+      dispatch(updateTodo(id, updates));
     });
   };
-}
+};
