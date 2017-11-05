@@ -13,7 +13,6 @@ export var TodoList = React.createClass({
             <p className="container__message">Nothing To Do</p>
           );
       }
-
       return filteredTodos.map((todo) => {
         return (
           <Todo key={todo.id} {...todo}/>
